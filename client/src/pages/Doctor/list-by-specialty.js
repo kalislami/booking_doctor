@@ -207,6 +207,7 @@ class Index extends Component {
                     isOpenNested={this.state.nestedModal}
                     isOpenAll={this.state.allModal}
                     isLoading={this.state.loading}
+                    auth={isAuthenticated}
                 />
             )
         }

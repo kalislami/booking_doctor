@@ -57,61 +57,72 @@ class Index extends Component {
                 </Row>
             )
         }
-            
-        if (list) {
-            if (list.data.length > 0) {
-                const filtered = this.filter(list.data);
-                content = (
-                    <Row className='py-5'>
-                        {filtered.map((item, i) => 
-                            <Col md={{ size:8, offset:2 }} key={i}>
-                                <Card className='mb-3'>
-                                    <CardBody>
-                                        <Row>
-                                            <Col md='2'>
-                                                <i className="fa fa-book fa-4x"/>
-                                            </Col>
-                                            <Col md='8'>
-                                                <h5> 
-                                                    Janji dengan {item.doctorID.name}, <br /> 
-                                                    pada tanggal: <Moment format='DD-MM-YYYY'>{item.bookingTime}</Moment>, 
-                                                    jam <Moment format='H:mm'>{item.bookingTime}</Moment> WIB <br />
-                                                    di {item.hospitalID.name}, kota {item.hospitalID.city}
-                                                </h5>
-                                            </Col>
-                                        </Row>
-                                    </CardBody>
-                                </Card>
+          
+        if (isAuthenticated === false) {
+            content = (
+                <Row className='py-5 justify-content-center'>
+                    <Col md='12'>
+                        <h5 className='text-center'>Silahkan login terlebih dahulu</h5>
+                    </Col>
+                </Row>
+            )
+        }
+        else {
+            if (list) {
+                if (list.data.length > 0) {
+                    const filtered = this.filter(list.data);
+                    content = (
+                        <Row className='py-5'>
+                            {filtered.map((item, i) => 
+                                <Col md={{ size:8, offset:2 }} key={i}>
+                                    <Card className='mb-3'>
+                                        <CardBody>
+                                            <Row>
+                                                <Col md='2'>
+                                                    <i className="fa fa-book fa-4x"/>
+                                                </Col>
+                                                <Col md='8'>
+                                                    <h5> 
+                                                        Janji dengan {item.doctorID.name}, <br /> 
+                                                        pada tanggal: <Moment format='DD-MM-YYYY'>{item.bookingTime}</Moment>, 
+                                                        jam <Moment format='H:mm'>{item.bookingTime}</Moment> WIB <br />
+                                                        di {item.hospitalID.name}, kota {item.hospitalID.city}
+                                                    </h5>
+                                                </Col>
+                                            </Row>
+                                        </CardBody>
+                                    </Card>
+                                </Col>
+                            )}
+                        </Row>
+                    )
+    
+                    filterSection = (
+                        <Row className='pt-5 justify-content-center'>
+                            <Col md='8'>
+                                <InputGroup>
+                                    <Input placeholder="cari dokter..." name="search" 
+                                        onChange={this.onChange} value={this.state.search}
+                                    />
+                                    <InputGroupAddon addonType="append">
+                                    <InputGroupText>
+                                        <i className="fa fa-search" aria-hidden="true" />
+                                    </InputGroupText>
+                                    </InputGroupAddon>
+                                </InputGroup>
                             </Col>
-                        )}
-                    </Row>
-                )
-
-                filterSection = (
-                    <Row className='pt-5 justify-content-center'>
-                        <Col md='8'>
-                            <InputGroup>
-                                <Input placeholder="cari dokter..." name="search" 
-                                    onChange={this.onChange} value={this.state.search}
-                                />
-                                <InputGroupAddon addonType="append">
-                                <InputGroupText>
-                                    <i className="fa fa-search" aria-hidden="true" />
-                                </InputGroupText>
-                                </InputGroupAddon>
-                            </InputGroup>
-                        </Col>
-                    </Row>
-                )
-            }
-            else {
-                content = (
-                    <Row className='py-5 justify-content-center'>
-                        <Col md='12'>
-                            <h5 className='text-center'>Empty data</h5>
-                        </Col>
-                    </Row>
-                )
+                        </Row>
+                    )
+                }
+                else {
+                    content = (
+                        <Row className='py-5 justify-content-center'>
+                            <Col md='12'>
+                                <h5 className='text-center'>Empty data</h5>
+                            </Col>
+                        </Row>
+                    )
+                }
             }
         }
 

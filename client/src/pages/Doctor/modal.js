@@ -193,9 +193,13 @@ const ShowModal = (props) => (
                 </ModalBody>
                 <ModalFooter>
                     <Button color="secondary" onClick={props.toggleNested}>Cancel</Button>{' '}
-                    <Button color="primary" onClick={props.onBooking}>
-                        {props.isLoading === true ? 'Loading...' : 'Submit'}
-                    </Button>
+                    {props.auth === true ? (
+                        <Button color="primary" onClick={props.onBooking}>
+                            {props.isLoading === true ? 'Loading...' : 'Submit'}
+                        </Button>
+                    ) : (
+                        <span className='ml-3'>Login untuk bisa booking dokter</span>
+                    ) }
                 </ModalFooter>
             </Modal>
         </ModalBody>
